@@ -23,7 +23,5 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.fn.setcellwidths {
-  { 0x2500, 0x257f, 2 },
-  { 0x2100, 0x214d, 2 },
   { 0x2605, 0x2605, 2 },
 }
