@@ -33,6 +33,9 @@ opt.list = true
 opt.listchars = { space = "･", tab = ">･" }
 opt.guifont = "HackGen Console NF:h12"
 opt.guifontwide = "HackGen Console NF:h12"
+opt.termguicolors = true
+opt.winblend = 0
+opt.pumblend = 0
 
 --------------------
 ---
