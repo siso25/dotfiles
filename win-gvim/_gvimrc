@@ -1,0 +1,9 @@
+colorscheme onedark
+highlight SpecialKey guifg=#585858
+highlight Cursor guibg=#dcdcdc
+set guifont=HackGen_Console_NF:h12:cSHIFTJIS
+set guicursor=a:blinkon0
+set guioptions-=T
+au GUIEnter * set transparency=220
+command Trans :set transparency=220
+command NoTrans :set transparency=255
