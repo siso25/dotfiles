@@ -1,0 +1,143 @@
+﻿"""""""""""""""
+"一般的な設定
+"""""""""""""""
+set nobackup
+set noswapfile
+set noundofile
+set autoread
+set hidden
+set showcmd
+set autoindent
+set noerrorbells
+set t_vb = 
+set belloff=all
+set fileformats=dos
+set nofixeol
+set mouse=a
+set clipboard+=unnamed
+set nocp
+set diffopt+=vertical
+set nowrap
+let &t_ti.="\e[2 q"
+let &t_SI .= "\e[6 q"
+let &t_EI .= "\e[2 q"
+let &t_SR .= "\e[4 q"
+let &t_te.="\e[0 q"
+
+"""""""""""""""
+"キーマップ
+"""""""""""""""
+let mapleader = "\<space>"
+let maplocalleader=","
+nnoremap J 10<Down>
+nnoremap K 10<Up>
+nnoremap <C-s> :w<CR>
+nnoremap <C-q> :qa<CR>
+nnoremap <ESC><ESC> :nohlsearch<CR>
+nnoremap <tab> >>
+nnoremap <S-tab> <<
+nnoremap <silent> ]b :bn<CR>
+nnoremap <silent> [b :bp<CR>
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <silent> <Leader>e :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>c :bd<CR>
+nnoremap <silent> <Leader>C :bd!<CR>
+nmap <silent> <Leader>/ <Plug>CommentaryLine
+nmap <silent> <Leader>ff :Files<CR>
+tnoremap <Esc> <C-\><C-n>
+inoremap <C-s> <ESC>:w<CR>
+inoremap <tab> <C-t>
+inoremap <S-tab> <C-d>
+inoremap <silent> jj <ESC>
+inoremap <silent> ｊｊ <ESC>
+inoremap <silent> <C-j> <C-^>
+vnoremap <tab> >
+vnoremap <S-tab> <
+vmap <silent> <Leader>/ <Plug>Commentary
+
+
+"""""""""""""""
+"見た目の調整
+"""""""""""""""
+set number
+set cursorline
+set showmatch
+set laststatus=2
+syntax enable
+set title
+set list
+set listchars=tab:>･,space:･
+set t_ut=
+
+"""""""""""""""
+"検索系
+"""""""""""""""
+set ignorecase
+set smartcase
+set wrapscan
+set hlsearch
+set incsearch
+
+"""""""""""""""
+"インデント
+"""""""""""""""
+set tabstop=4
+set shiftwidth=4
+filetype plugin on
+filetype indent on
+
+"""""""""""""""
+"プラグイン
+"""""""""""""""
+call plug#begin()
+Plug 'rhysd/clever-f.vim'
+Plug 'preservim/nerdtree'
+Plug 'machakann/vim-highlightedyank'
+Plug 'vim-airline/vim-airline'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'pprovost/vim-ps1'
+Plug 'joshdick/onedark.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'freitass/todo.txt-vim'
+Plug 'tpope/vim-dotenv'
+call plug#end()
+colorscheme onedark
+highlight SpecialKey ctermfg=240
+let NERDTreeMapActivateNode='l'
+let NERDTreeMapOpenRecursively='L'
+let NERDTreeShowBookmarks=1
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI=1
+let g:highlightedyank_highlight_duration = 100
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+"""""""""""""""
+"関数定義
+"""""""""""""""
+function! s:env(var) abort
+  return exists('*DotenvGet') ? DotenvGet(a:var) : eval('$'.a:var)
+endfunction
+
+function NewDaily()
+	:r !echo. & echo ---------------------------------------------------------------- \%date:~0,4\%年\%date:~5,2\%月日
+	execute ":r " . s:env('daily_template')
+endfunction
+
+"""""""""""""""
+"コマンド
+"""""""""""""""
+command Small :set guifont=HackGen_Console_NF:h12:cSHIFTJIS guifontwide=HackGen_Console_NF:h12
+command Mid :set guifont=HackGen_Console_NF:h14:cSHIFTJIS guifontwide=HackGen_Console_NF:h14
+command Big :set guifont=HackGen_Console_NF:h18:cSHIFTJIS guifontwide=HackGen_Console_NF:h18
+command Cmin execute "!". s:env('create_minute')
+command Daily call NewDaily()
+command Memo execute "e " . s:env('memo_file')
+command Todo execute "e " . s:env('todo_file')
