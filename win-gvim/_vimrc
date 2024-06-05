@@ -46,7 +46,6 @@ nnoremap <silent> <Leader>e :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>c :bd<CR>
 nnoremap <silent> <Leader>C :bd!<CR>
 nmap <silent> <Leader>/ <Plug>CommentaryLine
-nmap <silent> <Leader>ff :Files<CR>
 tnoremap <Esc> <C-\><C-n>
 inoremap <C-s> <ESC>:w<CR>
 inoremap <tab> <C-t>
@@ -98,13 +97,9 @@ Plug 'preservim/nerdtree'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-airline/vim-airline'
 Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'pprovost/vim-ps1'
 Plug 'joshdick/onedark.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'freitass/todo.txt-vim'
 Plug 'tpope/vim-dotenv'
 call plug#end()
@@ -127,7 +122,7 @@ function! s:env(var) abort
 endfunction
 
 function NewDaily()
-	:r !echo. & echo ---------------------------------------------------------------- \%date:~0,4\%年\%date:~5,2\%月日
+	:r !echo & echo ---------------------------------------------------------------- \%date:~0,4\%年\%date:~5,2\%月日
 	execute ":r " . s:env('daily_template')
 endfunction
 
