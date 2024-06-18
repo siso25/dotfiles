@@ -12,7 +12,7 @@ opt.autoread = true
 opt.showcmd = true
 opt.autoindent = true
 opt.errorbells = false
-opt.fileformats = dos
+opt.fileformats = 'unix','dos','mac'
 opt.fixeol = false
 opt.mouse = a
 opt.clipboard:append{ "unnamedplus" }
