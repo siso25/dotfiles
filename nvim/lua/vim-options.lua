@@ -12,9 +12,9 @@ opt.autoread = true
 opt.showcmd = true
 opt.autoindent = true
 opt.errorbells = false
-opt.fileformats = 'unix','dos','mac'
+opt.fileformats = { 'unix','dos','mac' }
 opt.fixeol = false
-opt.mouse = a
+opt.mouse = 'a'
 opt.clipboard:append{ "unnamedplus" }
 opt.cp = false
 opt.wrap = false
