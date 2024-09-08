@@ -14,6 +14,13 @@ vim.opt.rtp:prepend(lazypath)
 require("vim-options")
 require("lazy").setup("plugins")
 
+vim.api.nvim_create_augroup("new_memo", {})
+vim.api.nvim_create_autocmd("BufRead", {
+  group = "new_memo",
+  pattern = "memo.txt",
+  command = "$r! echo '' && echo '--------------------------------------------------------------------------------' && date"
+})
+
 local my_filetype = require("filetype")
 vim.api.nvim_create_augroup("init_augroup", {})
 vim.api.nvim_create_autocmd("FileType", {
