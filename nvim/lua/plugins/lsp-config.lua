@@ -11,8 +11,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          "solargraph",
-          "tsserver"
+          "solargraph"
         }
       })
     end
@@ -29,7 +28,7 @@ return {
       lspconfig.solargraph.setup({
         capabilities = capabilities
       })
-      lspconfig.tsserver.setup({
+      lspconfig.ts_ls.setup({
         capabilities = capabilities
       })
     end
