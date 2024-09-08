@@ -36,6 +36,10 @@ opt.guifontwide = "HackGen Console NF:h12"
 opt.termguicolors = true
 opt.winblend = 0
 opt.pumblend = 0
+vim.fn.setcellwidths {
+  { 0x2605, 0x2605, 2 },
+  { 0x203B, 0x203B, 2 },
+}
 
 --------------------
 ---
@@ -78,3 +82,23 @@ map("i", "<S-tab>", "<C-d>", opts)
 map("i", "jj", "<ESC>", opts)
 map("v", "<tab>", ">", opts)
 map("v", "<S-tab>", "<", opts)
+
+--------------------
+---
+--- autocmd
+---
+--------------------
+vim.api.nvim_create_augroup("new_memo", {})
+vim.api.nvim_create_autocmd("BufRead", {
+  group = "new_memo",
+  pattern = "memo.txt",
+  command = "$r! echo '' && echo '--------------------------------------------------------------------------------' && date"
+})
+
+local my_filetype = require("filetype")
+vim.api.nvim_create_augroup("init_augroup", {})
+vim.api.nvim_create_autocmd("FileType", {
+  group = "init_augroup",
+  pattern = "*",
+  callback = function(args) my_filetype[args.match]() end
+})
