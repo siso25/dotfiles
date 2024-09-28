@@ -19,6 +19,10 @@ M.text = function()
   set_indent(4, false)
 end
 
+M.gtd = function()
+  set_indent(4, true)
+end
+
 return setmetatable(M, {
   __index = function()
     return function()
