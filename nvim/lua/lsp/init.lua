@@ -17,9 +17,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
     if client:supports_method('textDocument/definition') then
-      vim.keymap.set('n', 'grd', function()
+      vim.keymap.set('n', 'gd', function()
         vim.lsp.buf.definition()
       end, { buffer = args.buf, desc = 'vim.lsp.buf.definition()' })
+    end
+
+    if client:supports_method('textDocument/references') then
+      vim.keymap.set('n', 'gr', function()
+        vim.lsp.buf.references()
+      end, { buffer = args.buf, desc = 'vim.lsp.buf.references()' })
+    end
+
+    if client:supports_method('textDocument/hover') then
+      vim.keymap.set('n', 'gh', function()
+        vim.lsp.buf.hover({ border = 'single'})
+      end, { buffer = args.buf, desc = 'vim.lsp.buf.hover()' })
     end
 
     if client:supports_method('textDocument/formatting') then

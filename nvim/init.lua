@@ -251,13 +251,17 @@ later(function()
     MiniPick.builtin.files({ tool = 'git' })
   end, { desc = 'mini.pick.files' })
 
-  vim.keymap.set('n', '<space>b', function()
+  vim.keymap.set('n', '<space>fb', function()
     local wipeout_cur = function()
       vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
     end
     local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
     MiniPick.builtin.buffers({ include_current = false }, { mappings = buffer_mappings })
   end, { desc = 'mini.pick.buffers' })
+
+  vim.keymap.set('n', '<leader>fw', function()
+    MiniPick.builtin.grep({ tool = 'git' })
+  end, { desc = 'mini.pick.grep' })
 
   require('mini.visits').setup()
   vim.keymap.set('n', '<space>h', function()
@@ -298,7 +302,7 @@ later(function()
       hide_during_completion = false,
     },
     filetypes = {
-      markdown = true,
+      markdown = false,
       gitcommit = true,
       ['*'] = function()
         -- disable for files with specific names
@@ -349,5 +353,9 @@ later(function()
     '<cmd>CopilotChatPrompt<cr>',
     { desc = 'CopilotChat predefined prompts' }
   )
+end)
+
+now(function()
+  add({ source = 'https://github.com/slim-template/vim-slim.git' })
 end)
 
