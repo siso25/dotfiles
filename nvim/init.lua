@@ -6,6 +6,7 @@ vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 vim.opt.scrolloff = 3
 vim.opt.whichwrap = 'b,s,h,l,<,>,[,],~'
+vim.opt.relativenumber = true
 
 require('user_command')
 
