@@ -7,6 +7,7 @@ vim.opt.tabstop = 2
 vim.opt.scrolloff = 3
 vim.opt.whichwrap = 'b,s,h,l,<,>,[,],~'
 vim.opt.relativenumber = true
+vim.opt.swapfile = false
 
 require('user_command')
 
@@ -151,10 +152,6 @@ later(function()
   require('mini.trailspace').setup()
 end)
 
-now(function()
-  require('mini.starter').setup()
-end)
-
 later(function()
   require('mini.pairs').setup()
 end)
@@ -230,17 +227,13 @@ later(function()
 end)
 
 now(function()
-  require('mini.files').setup()
-
-  vim.api.nvim_create_user_command(
-    'Files',
-    function()
-      MiniFiles.open()
-    end,
-    { desc = 'Open file exproler' }
-  )
-
-  vim.keymap.set('n', '<leader>e', '<cmd>Files<cr>', { desc = 'Open file exproler' })
+  add({ source = 'https://github.com/stevearc/oil.nvim.git' })
+  require('oil').setup({
+    view_options = {
+      show_hidden = true,
+    },
+  })
+  vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 end)
 
 later(function()
@@ -252,7 +245,7 @@ later(function()
     MiniPick.builtin.files({ tool = 'git' })
   end, { desc = 'mini.pick.files' })
 
-  vim.keymap.set('n', '<space>fb', function()
+  vim.keymap.set('n', '<space>b', function()
     local wipeout_cur = function()
       vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
     end
